@@ -9,23 +9,25 @@ export default function WalletPage() {
   const [balance, setBalance] = useState(0);
   const [amount, setAmount] = useState("");
 
+  // Load balance on page load
   useEffect(() => {
     fetch("/api/wallet")
       .then((res) => res.json())
       .then((data) => setBalance(data.balance));
   }, []);
 
+  // Add money
   const addMoney = async () => {
     if (!amount || Number(amount) <= 0) return;
 
-    const res = await fetch("/api/wallet/add", {
+    const res = await fetch("/api/wallet", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ amount: Number(amount) }),
     });
 
     const data = await res.json();
-    setBalance(data.balance);
+    setBalance(data.balance); // Update frontend balance
     setAmount("");
   };
 
@@ -47,6 +49,7 @@ export default function WalletPage() {
           <Button onClick={addMoney}>Add</Button>
         </CardContent>
       </Card>
+
       <Card>
         <CardHeader>
           <CardTitle>Current Balance</CardTitle>

@@ -28,6 +28,13 @@ export default function AdminMeetingsPage() {
 
   return (
     <div className="p-6 space-y-6">
+    <Button
+      variant="outline"
+      onClick={() => router.push("/admin-dashboard")}
+      className="mb-2"
+    >
+      ← Back to Admin Dashboard
+    </Button>      
       <h1 className="text-2xl font-semibold">Upcoming Meetings</h1>
 
       {meetings.length === 0 && (
